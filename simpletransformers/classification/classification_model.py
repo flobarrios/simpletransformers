@@ -58,7 +58,7 @@ import wandb
 
 
 class ClassificationModel:
-    def __init__(self, model_type, model_name, num_labels=None, weight=None, args=None, use_cuda=True, cuda_device=-1):
+    def __init__(self, model_type, model_name, num_labels=None, output_attentions=False, weight=None, args=None, use_cuda=True, cuda_device=-1):
         """
         Initializes a ClassificationModel model.
 
@@ -84,10 +84,10 @@ class ClassificationModel:
 
         config_class, model_class, tokenizer_class = MODEL_CLASSES[model_type]
         if num_labels:
-            self.config = config_class.from_pretrained(model_name, num_labels=num_labels)
+            self.config = config_class.from_pretrained(model_name, num_labels=num_labels, output_attentions=output_attentions)
             self.num_labels = num_labels
         else:
-            self.config = config_class.from_pretrained(model_name)
+            self.config = config_class.from_pretrained(model_name, output_attentions=output_attentions)
             self.num_labels = self.config.num_labels
         self.weight = weight
 
