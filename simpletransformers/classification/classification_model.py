@@ -752,7 +752,7 @@ class ClassificationModel:
             else:
                 preds = np.argmax(preds, axis=1)
 
-        return preds, model_outputs
+        return preds, model_outputs, outputs
 
     def _threshold(self, x, threshold):
         if x >= threshold:
